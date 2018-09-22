@@ -30,7 +30,10 @@ app.use(flash())
 app.use(express.static(__dirname+"/public"))
 app.set("view engine","ejs")
 
-mongoose.connect("mongodb://localhost/yelpcamp",{useNewUrlParser:true})
+mongoose.connect("mongodb://vivek:lateri99@ds141671.mlab.com:41671/vivek_first",{useNewUrlParser:true})
+//  mongodb://<dbuser>:<dbpassword>@ds141671.mlab.com:41671/vivek_first
+//  mongodb://localhost/yelpcamp
+
 
 app.use(methodOverride("_method"))
 app.use(bodyParser.urlencoded({extended:true}))
