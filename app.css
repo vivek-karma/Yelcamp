@@ -1,0 +1,10 @@
+
+    .mr-auto .navbar-nav {
+        left: auto;
+        float: right;
+        right: 0px;
+    }
+
+    .abc{
+        text-align: center
+    }
