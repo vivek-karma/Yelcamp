@@ -1,6 +1,11 @@
-<!--<%  if(!currentUser){  console.log(currentUser)  %>-->
+Welcome to yelpcamp !!!
 
- <% } else { %>
-                    
-                   
-                   <% } %>
+
+
+add your favourite campgrounds to this project......................................
+
+you need to register to add campgrounds or comments to this site....................
+
+you can edit or delete campgrounds and comments while login.........................
+
+you are only authorized to edit or delete yours campgrounds and comments............

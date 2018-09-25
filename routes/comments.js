@@ -15,10 +15,10 @@ router.get("/camgrounds/:id/comments/new",middleware.isLoggedIn,function(req,res
         if(err){
             console.log(err)
         }else{
-            res.render("comment/new",{campground:found})        
+            res.render("comment/new",{campground:found})
         }
     })
-    
+
 })
 
 router.post("/camgrounds/:id/comments",middleware.isLoggedIn,function(req,res){
@@ -37,7 +37,7 @@ router.post("/camgrounds/:id/comments",middleware.isLoggedIn,function(req,res){
                     comment.save()
                     found.comments.push(comment)
                     found.save()
-                    
+                    req.flash("success","comment added Successfully")
                     res.redirect("/camgrounds/"+found._id)
                 }
             })
@@ -52,10 +52,10 @@ router.get("/camgrounds/:id/comments/:comment_id/edit",middleware.isAuthorizedFo
     if(err){
         res.send(err)
     }else{
-    res.render("comment/edit",{campground_id: req.params.id, comment: foundComment})    
-    
+    res.render("comment/edit",{campground_id: req.params.id, comment: foundComment})
+
     }
-    
+
 })
 })
 
@@ -66,6 +66,7 @@ router.put("/camgrounds/:id/comments/:comment_id",middleware.isAuthorizedForComm
         if(err){
             res.render("back");
         }else{
+          req.flash("success","comment updated Successfully")
         res.redirect("/camgrounds/"+req.params.id);
         }
     })
@@ -78,11 +79,12 @@ router.delete("/camgrounds/:id/comments/:comment_id",middleware.isAuthorizedForC
         if(err){
             res.redirect("/back")
         }else{
+          req.flash("error","comment Deleted !!!")
             res.redirect("/camgrounds/"+req.params.id)
         }
-        
+
     })
-    
+
 })
 
 
@@ -99,14 +101,14 @@ router.delete("/camgrounds/:id/comments/:comment_id",middleware.isAuthorizedForC
 //     if(req.isAuthenticated()){
 //         // does have permissions
 //         comment.findById(req.params.comment_id,function(err,foundComment){
-        
+
 //             if(err){
 //                 res.redirect("back")
 //             }else{
-                
+
 //                 // render this page only user have authorization
 //                 if(foundComment.author.id.equals(req.user._id)){
-//                     next()       
+//                     next()
 //                 }else{
 //                 res.redirect("back")
 //                 }

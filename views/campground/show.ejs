@@ -1,7 +1,7 @@
 <% include ../partials/header %>
 
 <div class = "container">
-    
+
     <div class="row">
         <div class="col-md-3 ">
             <div class="lead">Yelp Camp</div>
@@ -11,32 +11,32 @@
                 <div class="list-group-item">Item 3</div>
             </div>
         </div>
-    
-    
-    
+
         <div class="col-md-9">
             <div class ="img-thumbnail img-fluid">
-                
-                <img style="width:100%; hieght:100%" class="img-responsive" src="<%= campground.img%>">   
+
+                <img style="width:100%; hieght:100%" class="img-responsive" src="<%= campground.img%>">
                 <div class="caption-full" >
-                    <h4 class="float-right" >$ 9.00</h4>
+
                     <h2><%= campground.name%></h2>
-                    <div class="caption">Created By : <%= campground.author.username%></div>
+                    <div class="caption"> <h6><em>Created By :</em> <%= campground.author.username%></h6> </div>
+                    <p><%= campground.description%></p>
+
                     <a class="btn btn-warning btn-sm" href="/camgrounds/<%=campground._id%>/edit">Edit</a>
-                    
+
                     <form  style="display:inline" id="deleteForm" action="/camgrounds/<%=campground._id%>?_method=DELETE" method="POST">
                         <button class="btn btn-sm btn-danger" >Delete</button>
                     </form>
-                    <p><%= campground.description%></p>
+
                 </div>
-            </div>  
-            
+            </div>
+
             <div >
                 <div class="card card-block bg-faded" style="background-color:#f2f7f7">
                <div class="text-right" style="padding-top:20px; padding-right:20px" >
                     <a  class="btn btn-success" href="/camgrounds/<%=campground._id%>/comments/new">add comments</a>
                </div>
-            
+
                     <hr>
                 <% campground.comments.forEach(function(comments){%>
                 <div class="row"  >
@@ -45,26 +45,18 @@
                         <span style="padding-left:10px; padding-right:10px" class="float-right">wed, 17:55 </span>
                         <div style="padding-left:10px; padding-right:10px"><%= comments.text%></div>
                         <a class="btn btn-sm btn-light" href="/camgrounds/<%= campground._id%>/comments/<%=comments._id%>/edit">Edit</a>
-                        
+
                         <form style="display:inline" action="/camgrounds/<%=campground._id%>/comments/<%=comments._id%>?_method=DELETE" method="POST">
                             <input  class="btn btn-sm btn-light" type="submit" value="Remove">
                         </form>
                     </div>
                 </div>
-                
-    
                 <% }) %>
                 </div>
-                
             </div>
             </div>
-            
          </div>
-        
-        
     </div>
-
-
 </div>
 
 

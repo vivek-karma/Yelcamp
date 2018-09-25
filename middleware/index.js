@@ -6,20 +6,23 @@ middleware.isAuthorizedForCampground = function(req,res,next){
     if(req.isAuthenticated()){
         // does have permissions
         campground.findById(req.params.id,function(err,found){
-        
-            if(err){
+
+            if(err || !found){
+              req.flash("error","Campground is not found")
                 res.redirect("back")
             }else{
-                
+
                 // render this page only user have authorization
                 if(found.author.id.equals(req.user._id)){
-                    next()       
+                    next()
                 }else{
+                  req.flash("error","you are not authorized !")
                 res.redirect("back")
                 }
             }
     })
     }else{
+        req.flash("error","You need to login first")
         res.redirect("back")
     }
 }
@@ -28,20 +31,23 @@ middleware.isAuthorizedForComment = function(req,res,next){
     if(req.isAuthenticated()){
         // does have permissions
         comment.findById(req.params.comment_id,function(err,foundComment){
-        
+
             if(err){
+                req.flash("error","Comment is not found")
                 res.redirect("back")
             }else{
-                
+
                 // render this page only user have authorization
                 if(foundComment.author.id.equals(req.user._id)){
-                    next()       
+                    next()
                 }else{
+                req.flash("error","you are not authorized !")
                 res.redirect("back")
                 }
             }
     })
     }else{
+        req.flash("error","You need to login first")
         res.redirect("back")
     }
 }

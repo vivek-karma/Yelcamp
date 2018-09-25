@@ -1,28 +1,21 @@
 <% include ../partials/header %>
-<link rel="stylesheet" href="app.css">
-
-
-
-
 
 <div class="container">
 
         <header class="jumbotron">
-            <div class="container" >
+            <div class="container text-center" >
                     <h1><strong>Welcome to YelpCamp !!!</strong></h1>
                     <h3>Have a look at Our Campgrounds</h3>
                     <p>
-                            <a class ="btn btn-default btn-success" href="/addnew">Add New Campground</a>
+                            <a class ="btn btn-large btn-success" href="/addnew">Add New Campground</a>
                     </p>
             </div>
+              </header>
 
-               
-        </header>
 
-       
-        
-        <div class="row">
-            <div class="col-mid-12"><h1>This is our Best Collection for You...</h1> </div>
+
+        <div class="row ">
+            <div class="col-mid-12" style="text-align:center"><h1>This is our Best Collection for You...</h1> </div>
         </div>
 
             <div class ="row text-center" style="display:flex; flex-wrap:wrap" >
@@ -30,26 +23,26 @@
             <% camgrounds.forEach(function(camground){ %>
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="img-thumbnail img-fluid">
-                           
+
                             <img src="<%=camground.img%>" width="100%" height="100%" >
-                            <div class="caption"><%= camground.name%></div>
-                            <div class="caption">Created By : <%= camground.author.username%></div>
-                            
+                            <div class="caption"> <h4><%= camground.name%></h4> </div>
+                            <div class="caption"> <h6><em>Created By :</em> <%= camground.author.username%></h6> </div>
+
                             <div>
-                                 <a href="/camgrounds/<%=camground._id%>">Read More</a>
+                                 <a class="btn btn-primary btn-sm" href="/camgrounds/<%=camground._id%>">More Info</a>
                             </div>
-                                
-                            
+
+
                     </div>
-                    
-                     
+
+
                 </div>
-                <% })%>     
+                <% })%>
             </div>
         </div>
-        
-        
-          
+
+
+
 </div>
 
 

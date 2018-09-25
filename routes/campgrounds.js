@@ -4,26 +4,27 @@ var router = express.Router()
 var campground = require("../models/campground"),
     comment = require("../models/comment"),
     middleware = require("../middleware")
-    
-    
-    
+
+
+
 // routing starts here.........................
 // home routes
 
 
 router.get("/camgrounds",function(req,res){
-    
+
         campground.find({},function(err,cg){
-        
-        if(err){
+
+        if(err || !cg){
+
             console.log(err);
-            
+
         }
         else{
             res.render("campground/camground",{camgrounds:cg})
         }
     })
-  
+
 })
 
 router.get("/camgrounds/:id",function(req,res){
@@ -38,7 +39,7 @@ router.get("/camgrounds/:id",function(req,res){
 })
 
 router.get("/addnew",middleware.isLoggedIn, function(req, res){
-    
+
     res.render("campground/new")
 })
 
@@ -51,26 +52,26 @@ router.post("/camgrounds",middleware.isLoggedIn,function(req,res){
         username: req.user.username
     }
     var newcamground = {name :name, img :img, description:description, author:author }
-    
+
     campground.create(newcamground,function(err,newlycg){
         if(err){
             console.log(err);
-            
+
         }
         else{
             //console.log(newlycg)
             res.redirect("/camgrounds")
         }
     })
-    
+
 })
 
 router.get("/camgrounds/:id/edit",middleware.isAuthorizedForCampground,function(req,res){
      campground.findById(req.params.id,function(err,found){
          res.render("campground/edit",{campground:found})
      })
-         
-    
+
+
 })
 
 router.put("/camgrounds/:id",middleware.isAuthorizedForCampground,function(req,res){
@@ -78,6 +79,7 @@ router.put("/camgrounds/:id",middleware.isAuthorizedForCampground,function(req,r
         if(err){
             console.log(err)
         }else{
+          req.flash("success","Updated Successfully !!!")
             res.redirect("/camgrounds/"+req.params.id)
         }
     })
@@ -90,6 +92,7 @@ router.delete("/camgrounds/:id",middleware.isAuthorizedForCampground,function(re
         if(err){
             res.redirect("/camgrounds")
         }
+        req.flash("success","Deleted Successfully !")
         res.redirect("/camgrounds")
     })
 })
